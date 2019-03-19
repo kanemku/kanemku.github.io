@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<script type="text/javascript">
+		var xhr = new XMLHttpRequest();
+
+		xhr.onreadystatechange = function(){
+			if(this.readyState === 4 && this.status === 200){
+				var response = this.responseText;
+				var regEx = /^[^)]+\)/;
+				var match = regEx.exec(response);
+				if(match){
+					var vers = match[0];
+					console.log(vers);
+				} else{
+					console.log('no match');
+				}
+				document.getElementById("version").innerHTML = vers;
+			}
+		}
+		// if (window.location.href === "file:///Users/kane/Desktop/yo.html"
+			xhr.open('GET', 'https://static.360works.com/plugins/CloudMail/changelog.txt', true);
+		xhr.send(null);
+
+		// function createCORSRequest(method, url){
+		//     var xhr = new XMLHttpRequest();
+		//     if ("withCredentials" in xhr){
+		//         xhr.open(method, url, true);
+		//     } else if (typeof XDomainRequest != "undefined"){
+		//         xhr = new XDomainRequest();
+		//         xhr.open(method, url);
+		//     } else {
+		//         xhr = null;
+		//     }
+		//     return xhr;
+		// }
+
+		// var request = createCORSRequest("get", "http://www.stackoverflow.com/");
+		// if (request){
+		//     request.onload = function() {
+		//         // ...
+		//     };
+		//     request.onreadystatechange = handler;
+		//     request.send();
+		// }
+	</script>
+	<h1>Current Version: <span id="version"></span></h1>
+</body>
+</html>
